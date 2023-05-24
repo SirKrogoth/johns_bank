@@ -1,4 +1,4 @@
-import app from '../../__commons__/src/api/app';
+import app from 'ms-commons/api/app';
 import accounts from './routes/accounts';
 
 export default app(accounts);

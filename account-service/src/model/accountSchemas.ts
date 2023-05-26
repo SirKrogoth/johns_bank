@@ -11,12 +11,16 @@ const accountSchema = joi.object({
                 .max(255)
                 .required(),
     document: joi.string()
+                .min(3)
+                .max(20)
                 .required(),
-    gender: joi.boolean()
+    gender: joi.number()
+            .max(1)
+            .integer()
             .required(),
     age: joi.number()
          .required()
-         .max(3),
+         .max(199),
     status: joi.number()
             .integer()
             .min(100)
@@ -24,6 +28,6 @@ const accountSchema = joi.object({
             .required()
 });
 
-export default {
+export {
     accountSchema
 }

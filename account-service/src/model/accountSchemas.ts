@@ -25,6 +25,10 @@ const accountSchema = joi.object({
             .integer()
             .min(100)
             .max(400)
+            .required(),
+    password: joi.string()
+            .min(3)
+            .max(20)
             .required()
 });
 

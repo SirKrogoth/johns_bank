@@ -34,5 +34,9 @@ exports.default = database_1.default.define('accounts', {
     status: {
         type: sequelize_1.default.SMALLINT.UNSIGNED,
         allowNull: false
+    },
+    password: {
+        type: sequelize_1.default.STRING(255),
+        allowNull: false
     }
 });

@@ -8,6 +8,8 @@ async function addAccount(req: Request, res: Response, next: any){
         const newAccount = req.body as iAccount;
         newAccount.accountId = uuidv4();
         const result = await accountRepository.add(newAccount);
+        result.password = '';
+        
         res.status(201).json(result);
     } catch (error) {
         console.error(error);

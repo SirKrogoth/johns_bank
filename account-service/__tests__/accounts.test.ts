@@ -9,7 +9,8 @@ describe('Testando rotas do accounts.', () => {
             document: '0154564165',
             gender: 1,
             age: 36,
-            status: 100
+            status: 100,
+            password: 'xY5PW@srUMZP@TH7'
         }
 
         const result = await request(app)
@@ -157,6 +158,23 @@ describe('Testando rotas do accounts.', () => {
             document: '0154564165',
             gender: 1,
             age: 36
+        }
+
+        const result = await request(app)
+                        .post('/accounts')
+                        .send(payload);
+        
+        expect(result.status).toEqual(400);
+    })
+
+    it('POST /accounts - Deve retornar statusCode 400 - sem password', async () => {
+        const payload ={
+            firstName: 'Pedro',
+            lastName: 'Geromel Testes ERRO 400',
+            document: '0154564165',
+            gender: 1,
+            age: 36,
+            status: 100
         }
 
         const result = await request(app)

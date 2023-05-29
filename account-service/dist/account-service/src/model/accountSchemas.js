@@ -30,6 +30,10 @@ const accountSchema = joi_1.default.object({
         .integer()
         .min(100)
         .max(400)
+        .required(),
+    password: joi_1.default.string()
+        .min(3)
+        .max(20)
         .required()
 });
 exports.accountSchema = accountSchema;

@@ -35,6 +35,10 @@ export default database.define<iAccountModel>('accounts', {
     status: {
         type: sequelize.SMALLINT.UNSIGNED,
         allowNull: false
+    },
+    password: {
+        type: sequelize.STRING(255),
+        allowNull: false
     }
 
 });

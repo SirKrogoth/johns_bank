@@ -20,6 +20,7 @@ function addAccount(req, res, next) {
             const newAccount = req.body;
             newAccount.accountId = (0, uuid_1.v4)();
             const result = yield accountRepository_1.default.add(newAccount);
+            result.password = '';
             res.status(201).json(result);
         }
         catch (error) {

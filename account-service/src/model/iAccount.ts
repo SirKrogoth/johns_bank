@@ -7,5 +7,6 @@ export default interface iAccount{
     document: string,
     gender: boolean,
     age: number,
-    status: accountStatus
+    status: accountStatus,
+    password: string
 }

@@ -8,4 +8,4 @@ const router = Router();
 router.post('/accounts/', validadeAccountSchema, accountController.addAccount);
 
 //Colocar aqui somente os métodos do tipo GET
-export default router; 
+export default router;

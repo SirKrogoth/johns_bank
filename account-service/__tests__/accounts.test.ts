@@ -10,7 +10,7 @@ describe('Testando rotas do accounts.', () => {
             gender: 1,
             age: 36,
             status: 100,
-            password: 'xY5PW@srUMZP@TH7'
+            password: '123456'
         }
 
         const result = await request(app)
@@ -27,7 +27,8 @@ describe('Testando rotas do accounts.', () => {
             document: '0154564165',
             gender: 1,
             age: '36',
-            status: 90000000000000000000000000000
+            status: 90000000000000000000000000000,
+            password: '123456'
         }
 
         const result = await request(app)
@@ -44,7 +45,8 @@ describe('Testando rotas do accounts.', () => {
             document: '0154564165',
             gender: 'a',
             age: '36',
-            status: 100
+            status: 100,
+            password: '123456'
         }
 
         const result = await request(app)
@@ -61,7 +63,8 @@ describe('Testando rotas do accounts.', () => {
             document: '0154564165',
             gender: 1,
             age: '36',
-            status: 900
+            status: 900,
+            password: '123456'
         }
 
         const result = await request(app)
@@ -77,7 +80,8 @@ describe('Testando rotas do accounts.', () => {
             document: '0154564165',
             gender: 1,
             age: '36',
-            status: 100
+            status: 100,
+            password: '123456'
         }
 
         const result = await request(app)
@@ -93,7 +97,8 @@ describe('Testando rotas do accounts.', () => {
             document: '0154564165',
             gender: 1,
             age: '36',
-            status: 100
+            status: 100,
+            password: '123456'
         }
 
         const result = await request(app)
@@ -109,7 +114,8 @@ describe('Testando rotas do accounts.', () => {
             lastName: 'Geromel Testes ERRO 400',
             gender: 1,
             age: '36',
-            status: 100
+            status: 100,
+            password: '123456'
         }
 
         const result = await request(app)
@@ -125,7 +131,8 @@ describe('Testando rotas do accounts.', () => {
             lastName: 'Geromel Testes ERRO 400',
             document: '0154564165',
             age: 36,
-            status: 100
+            status: 100,
+            password: '123456'
         }
 
         const result = await request(app)
@@ -141,7 +148,8 @@ describe('Testando rotas do accounts.', () => {
             lastName: 'Geromel Testes ERRO 400',
             document: '0154564165',
             gender: 1,
-            status: 100
+            status: 100,
+            password: '123456'
         }
 
         const result = await request(app)
@@ -157,7 +165,8 @@ describe('Testando rotas do accounts.', () => {
             lastName: 'Geromel Testes ERRO 400',
             document: '0154564165',
             gender: 1,
-            age: 36
+            age: 36,
+            password: '123456'
         }
 
         const result = await request(app)

@@ -3,10 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validadeAccountSchema = void 0;
+exports.validateLoginSchema = void 0;
+const loginSchema_1 = require("src/model/schemas/loginSchema");
 const validateAccountSchemaMiddleware_1 = __importDefault(require("ms-commons/api/routers/validateAccountSchemaMiddleware"));
-const accountSchema_1 = require("../../model/schemas/accountSchema");
-function validadeAccountSchema(req, res, next) {
-    return validateAccountSchemaMiddleware_1.default.validadeSchema(accountSchema_1.accountSchema, req, res, next);
+function validateLoginSchema(req, res, next) {
+    return validateAccountSchemaMiddleware_1.default.validadeSchema(loginSchema_1.loginSchema, req, res, next);
 }
-exports.validadeAccountSchema = validadeAccountSchema;
+exports.validateLoginSchema = validateLoginSchema;

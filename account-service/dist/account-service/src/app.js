@@ -4,5 +4,5 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("ms-commons/api/app"));
-const accounts_1 = __importDefault(require("./routes/accounts"));
-exports.default = (0, app_1.default)(accounts_1.default);
+const accountsRouter_1 = __importDefault(require("./routes/accountsRouter"));
+exports.default = (0, app_1.default)(accountsRouter_1.default);

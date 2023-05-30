@@ -7,6 +7,14 @@ const accountModel_1 = __importDefault(require("./accountModel"));
 function add(account) {
     return accountModel_1.default.create(account);
 }
+function findByDocument(document) {
+    return accountModel_1.default.findOne({
+        where: {
+            document: document
+        }
+    });
+}
 exports.default = {
-    add
+    add,
+    findByDocument
 };

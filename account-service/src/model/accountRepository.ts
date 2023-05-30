@@ -6,6 +6,15 @@ function add(account: iAccount){
     return accountModel.create(account);
 }
 
+function findByDocument(document: string){
+    return accountModel.findOne<iAccountModel>({
+        where: {
+            document: document
+        }
+    });
+}
+
 export default {
-    add
+    add,
+    findByDocument
 }

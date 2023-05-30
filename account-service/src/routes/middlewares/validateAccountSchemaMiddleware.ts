@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import commonsMiddleware from 'ms-commons/api/routers/validateAccountSchemaMiddleware';
-import { accountSchema } from '../../model/accountSchemas';
+import { accountSchema } from '../../model/schemas/accountSchema';
 
 function validadeAccountSchema(req: Request, res: Response, next: any){
     return commonsMiddleware.validadeSchema(accountSchema, req, res, next);

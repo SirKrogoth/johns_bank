@@ -7,12 +7,22 @@ module.exports = {
     await queryInterface.createTable('balances', {
 
         balanceId: {
-          type: Sequelize.DataTypes.STRING,
+          type: Sequelize.DataTypes.STRING(255),
           allowNull: false,
           primaryKey: true
         },
-        accountId: {
-          type: Sequelize.DataTypes.STRING,
+        originId: {
+          type: Sequelize.DataTypes.STRING(255),
+          allowNull: false,
+          references: {
+            model: 'accounts',
+            key: 'accountID'
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        },
+        destinyId: {
+          type: Sequelize.DataTypes.STRING(255),
           allowNull: false,
           references: {
             model: 'accounts',

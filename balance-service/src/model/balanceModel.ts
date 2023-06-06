@@ -13,7 +13,11 @@ const balance = database.define<iBalanceModel>('balances', {
         primaryKey: true,
         allowNull: false
     },
-    accountId: {
+    originId: {
+        type: sequelize.STRING(255),
+        allowNull: false
+    },
+    destinyId: {
         type: sequelize.STRING(255),
         allowNull: false
     },

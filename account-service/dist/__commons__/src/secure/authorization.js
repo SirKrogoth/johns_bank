@@ -41,6 +41,8 @@ function decodedToken(token) {
             return decoded;
         }
         catch (error) {
+            console.error(error);
+            return null;
         }
     });
 }

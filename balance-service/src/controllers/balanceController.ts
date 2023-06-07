@@ -49,7 +49,6 @@ async function findExtractByAccount(req: Request, res: Response, next: any){
         
         const accountId = req.params.accountId;
         const result = await balanceRepository.findExtractByAccount(accountId);
-        console.log(result);
         res.status(200).json(result);
 
     } catch (error) {

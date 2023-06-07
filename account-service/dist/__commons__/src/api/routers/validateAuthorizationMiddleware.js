@@ -37,15 +37,18 @@ function validateAccountPermissionForBalance(req, res, next) {
             const token = req.headers['x-access-token'];
             const payload = req.body;
             const decoded = yield authorization_1.default.decodedToken(token);
-            if ((decoded === null || decoded === void 0 ? void 0 : decoded.accountId) != payload.originId) {
-                return res.status(403).json({
-                    "message": "Acesso negado para realizar esta transação.",
-                    "status": "403",
-                    "docodedId": decoded === null || decoded === void 0 ? void 0 : decoded.accountId,
-                    "payload": payload.originId
-                });
+            if (decoded == null)
+                throw new Error('Não foi possível identificar o accountId.');
+            if (payload.originId != undefined) {
+                if ((decoded === null || decoded === void 0 ? void 0 : decoded.accountId) != payload.originId) {
+                    return res.status(403).json({
+                        "message": "Acesso negado para realizar esta transação.",
+                        "status": "403"
+                    });
+                }
             }
-            next(decoded === null || decoded === void 0 ? void 0 : decoded.accountId);
+            req.params.accountId = decoded.accountId;
+            next();
         }
         catch (error) {
             console.error(`validateAccountPermissionForBalance: ${error}`);

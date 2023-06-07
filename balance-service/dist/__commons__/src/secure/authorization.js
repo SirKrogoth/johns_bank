@@ -20,11 +20,10 @@ const jwtAlgorithm = 'RS256';
 function verify(token) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const decoded = yield jsonwebtoken_1.default.verify(token, publicKey, {
-                algorithms: [jwtAlgorithm]
-            });
+            const decoded = yield decodedToken(token);
+            decoded === null || decoded === void 0 ? void 0 : decoded.accountId;
             return {
-                accountId: decoded.accountId
+                accountId: decoded === null || decoded === void 0 ? void 0 : decoded.accountId
             };
         }
         catch (error) {
@@ -33,6 +32,21 @@ function verify(token) {
         }
     });
 }
+function decodedToken(token) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const decoded = yield jsonwebtoken_1.default.verify(token, publicKey, {
+                algorithms: [jwtAlgorithm]
+            });
+            return decoded;
+        }
+        catch (error) {
+            console.error(error);
+            return null;
+        }
+    });
+}
 exports.default = {
-    verify
+    verify,
+    decodedToken
 };

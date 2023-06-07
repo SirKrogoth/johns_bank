@@ -14,13 +14,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const balanceRepository_1 = __importDefault(require("../model/balanceRepository"));
 const uuid_1 = require("uuid");
+const balanceTypes_1 = require("../model/balanceTypes");
 function addBalance(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const balance = req.body;
-            balance.balanceId = (0, uuid_1.v4)();
-            const result = yield balanceRepository_1.default.add(balance);
-            res.status(201).json(result);
+            const accountId = req.params.accountId;
+            if ((accountId == balance.destinyId || balance.originId == balance.destinyId) && balance.type == balanceTypes_1.balanceTypes.TRANFER) {
+                res.status(400).json({
+                    "message": "O originId e destinyId não podem serem os mesmos.",
+                    "status": 400
+                }).end();
+            }
+            else {
+                if (balance.type != balanceTypes_1.balanceTypes.WITHDRAW && balance.type != balanceTypes_1.balanceTypes.DEPOSIT && balance.type != balanceTypes_1.balanceTypes.TRANFER) {
+                    res.status(400).json({
+                        "Error": "Deverá ser informado um dos seguintes tipos: W, D ou T.",
+                        "Status": 400
+                    });
+                    throw new Error("Deverá ser informado um dos seguintes tipos: W, D ou T.");
+                }
+                balance.originId = accountId;
+                balance.balanceId = (0, uuid_1.v4)();
+                const result = yield balanceRepository_1.default.add(balance);
+                res.status(201).json(result);
+            }
         }
         catch (error) {
             console.error('addBalance: ' + error);
@@ -28,6 +46,35 @@ function addBalance(req, res, next) {
         }
     });
 }
+function findBalanceByAccount(req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const accountId = req.params.accountId;
+            const result = yield balanceRepository_1.default.findBalanceByAccount(accountId);
+            res.status(200).json(result);
+        }
+        catch (error) {
+            console.error('findBalanceByAccount: ' + error);
+            res.status(400).end();
+        }
+    });
+}
+function findExtractByAccount(req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const accountId = req.params.accountId;
+            const result = yield balanceRepository_1.default.findExtractByAccount(accountId);
+            console.log(result);
+            res.status(200).json(result);
+        }
+        catch (error) {
+            console.error(`findExtractByAccount: ${error}`);
+            res.status(400).end();
+        }
+    });
+}
 exports.default = {
-    addBalance
+    addBalance,
+    findBalanceByAccount,
+    findExtractByAccount
 };

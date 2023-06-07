@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.balanceTypes = void 0;
 var balanceTypes;
 (function (balanceTypes) {
-    balanceTypes["DEPOSIT"] = "D";
-    balanceTypes["WITHDRAW"] = "W";
-    balanceTypes["TRANFER"] = "T";
+    balanceTypes["DEPOSIT"] = "d";
+    balanceTypes["WITHDRAW"] = "w";
+    balanceTypes["TRANFER"] = "t";
 })(balanceTypes = exports.balanceTypes || (exports.balanceTypes = {}));

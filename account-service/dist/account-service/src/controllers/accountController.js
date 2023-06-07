@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const accountRepository_1 = __importDefault(require("../model/accountRepository"));
 const uuid_1 = require("uuid");
 const autentication_1 = __importDefault(require("../secure/autentication"));
-const authorization_1 = __importDefault(require("src/secure/authorization"));
+const authorization_1 = __importDefault(require("../secure/authorization"));
 function verifyAuthentication(req, res, next) {
     return res.status(200).json({
         "Retorno": "Está funcionando a autenticação",

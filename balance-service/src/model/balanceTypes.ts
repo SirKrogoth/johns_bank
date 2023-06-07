@@ -1,5 +1,5 @@
 export enum balanceTypes{
-    DEPOSIT = 'd',
-    WITHDRAW = 'w',
-    TRANFER = 't'
+    DEPOSIT = "D",
+    WITHDRAW = "W",
+    TRANFER = "T"
 }

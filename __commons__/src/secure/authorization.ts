@@ -9,12 +9,11 @@ export type Token = { accountId: string }
 
 async function verify(token: string){
     try {
-        const decoded: Token = await jwt.verify(token, publicKey, {
-            algorithms: [jwtAlgorithm]
-        } as VerifyOptions) as Token;
+        const decoded = await decodedToken(token);
+        decoded?.accountId;
         
         return {
-            accountId: decoded.accountId
+            accountId: decoded?.accountId
         }
     } catch (error) {
         console.error(`Houve um erro no Verify: ${error}`);
@@ -22,6 +21,20 @@ async function verify(token: string){
     }
 }
 
+async function decodedToken(token: string){
+    try {
+        const decoded: Token = await jwt.verify(token, publicKey, {
+            algorithms: [jwtAlgorithm]
+        } as VerifyOptions) as Token;   
+
+        return decoded;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }        
+}
+
 export default { 
-    verify
+    verify,
+    decodedToken
 }

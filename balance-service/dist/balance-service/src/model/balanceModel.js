@@ -12,7 +12,11 @@ const balance = database_1.default.define('balances', {
         primaryKey: true,
         allowNull: false
     },
-    accountId: {
+    originId: {
+        type: sequelize_1.default.STRING(255),
+        allowNull: false
+    },
+    destinyId: {
         type: sequelize_1.default.STRING(255),
         allowNull: false
     },

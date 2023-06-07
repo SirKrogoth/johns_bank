@@ -1,4 +1,4 @@
-import { loginSchema } from "src/model/schemas/loginSchema";
+import { loginSchema } from "../../model/schemas/loginSchema";
 import commonsMiddleware from 'ms-commons/api/routers/validateAccountSchemaMiddleware';
 import { Request, Response } from 'express';
 

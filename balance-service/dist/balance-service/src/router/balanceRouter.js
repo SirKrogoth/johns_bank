@@ -8,6 +8,8 @@ const balanceController_1 = __importDefault(require("../controllers/balanceContr
 const validateAuthorizationMiddleware_1 = require("./middleware/validateAuthorizationMiddleware");
 const router = (0, express_1.Router)();
 //Colocar aqui os métodos POST
-router.post('/balance/addBalance', validateAuthorizationMiddleware_1.validateAuthorization, balanceController_1.default.addBalance);
+router.post('/balance/addBalance', validateAuthorizationMiddleware_1.validateAuthorization, validateAuthorizationMiddleware_1.validateAccountPermission, balanceController_1.default.addBalance);
+router.post('/balance/findBalanceByAccount', validateAuthorizationMiddleware_1.validateAuthorization, validateAuthorizationMiddleware_1.validateAccountPermission, balanceController_1.default.findBalanceByAccount);
+router.post('/balance/findExtractByAccount', validateAuthorizationMiddleware_1.validateAuthorization, validateAuthorizationMiddleware_1.validateAccountPermission, balanceController_1.default.findExtractByAccount);
 //Colocar aqui os métodos GET
 exports.default = router;

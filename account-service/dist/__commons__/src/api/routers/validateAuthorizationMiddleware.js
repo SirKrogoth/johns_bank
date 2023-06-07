@@ -31,6 +31,29 @@ function validateAuthorization(req, res, next) {
         }
     });
 }
+function validateAccountPermissionForBalance(req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const token = req.headers['x-access-token'];
+            const payload = req.body;
+            const decoded = yield authorization_1.default.decodedToken(token);
+            if ((decoded === null || decoded === void 0 ? void 0 : decoded.accountId) != payload.originId) {
+                return res.status(403).json({
+                    "message": "Acesso negado para realizar esta transação.",
+                    "status": "403",
+                    "docodedId": decoded === null || decoded === void 0 ? void 0 : decoded.accountId,
+                    "payload": payload.originId
+                });
+            }
+            next(decoded === null || decoded === void 0 ? void 0 : decoded.accountId);
+        }
+        catch (error) {
+            console.error(`validateAccountPermissionForBalance: ${error}`);
+            res.status(400).end();
+        }
+    });
+}
 exports.default = {
-    validateAuthorization
+    validateAuthorization,
+    validateAccountPermissionForBalance
 };

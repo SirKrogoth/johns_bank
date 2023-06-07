@@ -4,7 +4,7 @@ import accountRepository from '../model/accountRepository';
 import { v4 as uuidv4 } from 'uuid';
 import autentication from '../secure/autentication';
 import ms_authorization from 'ms-commons/secure/authorization';
-import authorization from 'src/secure/authorization';
+import authorization from '../secure/authorization';
 
 function verifyAuthentication(req: Request, res: Response, next: any){
     return res.status(200).json({

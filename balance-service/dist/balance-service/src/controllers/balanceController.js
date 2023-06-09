@@ -64,7 +64,6 @@ function findExtractByAccount(req, res, next) {
         try {
             const accountId = req.params.accountId;
             const result = yield balanceRepository_1.default.findExtractByAccount(accountId);
-            console.log(result);
             res.status(200).json(result);
         }
         catch (error) {
@@ -73,8 +72,21 @@ function findExtractByAccount(req, res, next) {
         }
     });
 }
+function testConection(req, res, next) {
+    try {
+        res.status(200).json({
+            "api": "balance-service",
+            "status": 200
+        }).end();
+    }
+    catch (error) {
+        console.error(`testConection: ${error}`);
+        res.status(400).end();
+    }
+}
 exports.default = {
     addBalance,
     findBalanceByAccount,
-    findExtractByAccount
+    findExtractByAccount,
+    testConection
 };

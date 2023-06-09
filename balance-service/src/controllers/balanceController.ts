@@ -57,8 +57,22 @@ async function findExtractByAccount(req: Request, res: Response, next: any){
     }
 }
 
+function testConection(req: Request, res: Response, next: any){
+    try {
+
+        res.status(200).json({
+            "api": "balance-service",
+            "status": 200
+        }).end();
+    } catch (error) {
+        console.error(`testConection: ${error}`);
+        res.status(400).end();
+    }
+}
+
 export default { 
     addBalance,
     findBalanceByAccount,
-    findExtractByAccount
+    findExtractByAccount,
+    testConection
 }

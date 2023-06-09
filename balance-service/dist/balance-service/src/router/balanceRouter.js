@@ -12,4 +12,5 @@ router.post('/balance/addBalance', validateAuthorizationMiddleware_1.validateAut
 router.post('/balance/findBalanceByAccount', validateAuthorizationMiddleware_1.validateAuthorization, validateAuthorizationMiddleware_1.validateAccountPermission, balanceController_1.default.findBalanceByAccount);
 router.post('/balance/findExtractByAccount', validateAuthorizationMiddleware_1.validateAuthorization, validateAuthorizationMiddleware_1.validateAccountPermission, balanceController_1.default.findExtractByAccount);
 //Colocar aqui os métodos GET
+router.get('/balance/testConection', balanceController_1.default.testConection);
 exports.default = router;

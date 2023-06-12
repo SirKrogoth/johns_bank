@@ -11,6 +11,7 @@
       "./src/", 
       "../__commons__/src"
     ],
+    "resolveJsonModule": true,
     "outDir": "./dist/",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

@@ -21,7 +21,8 @@ async function addBalance(req: Request, res: Response, next: any){
                     "Status": 400
                 });
                 throw new Error("Deverá ser informado um dos seguintes tipos: W, D ou T.");
-            }                
+            } else if(balance.type === balanceTypes.DEPOSIT || balance.type === balanceTypes.WITHDRAW)
+                balance.destinyId = accountId;
             balance.originId = accountId;
             balance.balanceId = uuidv4();
             const result = await balanceRepository.add(balance);

@@ -34,6 +34,8 @@ function addBalance(req, res, next) {
                     });
                     throw new Error("Deverá ser informado um dos seguintes tipos: W, D ou T.");
                 }
+                else if (balance.type === balanceTypes_1.balanceTypes.DEPOSIT || balance.type === balanceTypes_1.balanceTypes.WITHDRAW)
+                    balance.destinyId = accountId;
                 balance.originId = accountId;
                 balance.balanceId = (0, uuid_1.v4)();
                 const result = yield balanceRepository_1.default.add(balance);

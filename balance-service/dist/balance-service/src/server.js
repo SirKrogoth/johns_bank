@@ -14,9 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./app"));
 const database_1 = __importDefault(require("ms-commons/data/database"));
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const swagger_json_1 = __importDefault(require("./swagger.json"));
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const port = parseInt(`${process.env.PORT}`);
+        app_1.default.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_json_1.default));
         yield database_1.default.sync();
         console.log(`Database is running in ${process.env.DB_NAME}....`);
         yield app_1.default.listen(port, () => {

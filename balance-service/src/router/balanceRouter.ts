@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import balanceController from '../controllers/balanceController';
 import { validateAuthorization, validateAccountPermission } from './middleware/validateAuthorizationMiddleware';
-import { valid } from 'joi';
 
 const router = Router();
 

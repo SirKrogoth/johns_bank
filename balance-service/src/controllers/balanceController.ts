@@ -46,8 +46,7 @@ async function findBalanceByAccount(req: Request, res: Response, next: any){
 }
 
 async function findExtractByAccount(req: Request, res: Response, next: any){
-    try {
-        
+    try {        
         const accountId = req.params.accountId;
         const result = await balanceRepository.findExtractByAccount(accountId);
         res.status(200).json(result);
@@ -60,7 +59,6 @@ async function findExtractByAccount(req: Request, res: Response, next: any){
 
 function testConection(req: Request, res: Response, next: any){
     try {
-
         res.status(200).json({
             "api": "balance-service",
             "status": 200

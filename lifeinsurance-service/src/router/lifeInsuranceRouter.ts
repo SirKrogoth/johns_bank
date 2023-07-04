@@ -1,9 +1,13 @@
 import { Router } from 'express';
+import lifeInsuranceController from '../controllers/lifeInsuranceController';
 
 const router = Router();
 
-router.get('/', (req, res) => {
-    res.status(200).end();
-});
+//HTTP POST
+router.post('/findCoverageByAccountId', lifeInsuranceController.findCoverageByAccountId);
+
+//HTTP GET
+router.get('/', lifeInsuranceController.healthCheck);
+router.get('/findCoverageByAccountId/:accountId', lifeInsuranceController.findCoverageByAccountId);
 
 export default router;

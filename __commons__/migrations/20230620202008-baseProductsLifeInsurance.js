@@ -26,7 +26,7 @@ module.exports = {
         allowNull: false
       },
       situation: {
-        type: Sequelize.DataTypes.BOOLEAN,
+        type: Sequelize.DataTypes.CHAR(1),
         allowNull: false
       },
       createdAt: {

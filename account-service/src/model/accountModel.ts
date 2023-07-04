@@ -1,4 +1,4 @@
-import database from '../../../__commons__/src/data/database';
+import database from 'ms-commons/data/database';
 import sequelize, { Model, Optional } from 'sequelize';
 import iAccount from './iAccount';
 

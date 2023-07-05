@@ -27,7 +27,22 @@ async function findCoverageByAccountId(req: Request, res: Response, next: any){
     }
 }
 
+async function findAllLifeInsurance(req: Request, res: Response, next: any){
+    try {        
+        const lifeInsurance : iLifeInsurance[] = await lifeInsuranceRepository.findAllLifeInsurance();
+        console.log(lifeInsurance);
+
+        if(lifeInsurance === null || lifeInsurance.length === 0) return res.status(StatusCodes.NOT_FOUND).end();
+
+        return res.status(StatusCodes.OK).json(lifeInsurance);
+    } catch (error) {
+        console.error(`findAllLifeInsurance: ${error}`);
+        res.status(StatusCodes.BAD_REQUEST).end();
+    }
+}
+
 export default {
     findCoverageByAccountId,
-    healthCheck
+    healthCheck,
+    findAllLifeInsurance
 }

@@ -13,6 +13,11 @@ function findCoverageByAccountId(accountId: string){
         });
 }
 
+function findAllLifeInsurance(){
+    return lifeInsuranceModel.findAll();
+}
+
 export default {
-    findCoverageByAccountId
+    findCoverageByAccountId,
+    findAllLifeInsurance
 }

@@ -41,7 +41,23 @@ function findCoverageByAccountId(req, res, next) {
         }
     });
 }
+function findAllLifeInsurance(req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const lifeInsurance = yield lifeInsuranceRepository_1.default.findAllLifeInsurance();
+            console.log(lifeInsurance);
+            if (lifeInsurance === null || lifeInsurance.length === 0)
+                return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).end();
+            return res.status(http_status_codes_1.StatusCodes.OK).json(lifeInsurance);
+        }
+        catch (error) {
+            console.error(`findAllLifeInsurance: ${error}`);
+            res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).end();
+        }
+    });
+}
 exports.default = {
     findCoverageByAccountId,
-    healthCheck
+    healthCheck,
+    findAllLifeInsurance
 };

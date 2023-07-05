@@ -16,6 +16,10 @@ function findCoverageByAccountId(accountId) {
         type: sequelize_1.QueryTypes.SELECT
     });
 }
+function findAllLifeInsurance() {
+    return lifeInsuranceModel_1.default.findAll();
+}
 exports.default = {
-    findCoverageByAccountId
+    findCoverageByAccountId,
+    findAllLifeInsurance
 };

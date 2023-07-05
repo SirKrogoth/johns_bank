@@ -1,5 +1,6 @@
 export default interface iLifeInsurance{
     lifeInsuranceId: string,
+    description: string,
     startVigidity: Date,
     endVigidity: Date,
     susepRegister: number,

@@ -6,10 +6,14 @@ interface iLifeInsuranceCreationAttributes extends Optional<iLifeInsurance, 'lif
 
 export interface iLifeInsuranceModel extends Model<iLifeInsurance, iLifeInsuranceCreationAttributes>, iLifeInsurance {}
 
-const lifeInsurance =  database.define<iLifeInsuranceModel>('lifeinsurance', {
+const lifeInsurance =  database.define<iLifeInsuranceModel>('lifeinsurances', {
     lifeInsuranceId: {
         type: sequelize.STRING(255),
         primaryKey: true,
+        allowNull: false
+    },
+    description: {
+        type: sequelize.STRING(255),
         allowNull: false
     },
     startVigidity: {

@@ -33,7 +33,7 @@
     "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.0",
     "mysql2": "^3.3.2",
-    "sequelize": "^6.31.1",
+    "sequelize": "^6.28.2",
     "swagger-ui-express": "^4.6.3",
     "uuid": "^9.0.0"
   }

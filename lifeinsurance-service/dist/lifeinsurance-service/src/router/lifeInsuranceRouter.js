@@ -11,4 +11,5 @@ router.post('/findCoverageByAccountId', lifeInsuranceController_1.default.findCo
 //HTTP GET
 router.get('/', lifeInsuranceController_1.default.healthCheck);
 router.get('/findCoverageByAccountId/:accountId', lifeInsuranceController_1.default.findCoverageByAccountId);
+router.get('/findAllLifeInsurance', lifeInsuranceController_1.default.findAllLifeInsurance);
 exports.default = router;

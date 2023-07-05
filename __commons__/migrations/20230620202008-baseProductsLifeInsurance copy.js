@@ -3,12 +3,12 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('lifeInsurance', {
+    await queryInterface.createTable('lifeInsurances', {
       lifeInsuranceId: {
         type: Sequelize.DataTypes.STRING(255),
         allowNull: false,
         primaryKey: true
-      }, 
+      },
       startVigidity: { 
         type: Sequelize.DataTypes.DATE,
         allowNull: false
@@ -57,7 +57,7 @@ module.exports = {
         type: Sequelize.DataTypes.STRING(255),
         allowNull: false,
         references: {
-          model: 'lifeInsurance',
+          model: 'lifeInsurances',
           key: 'lifeInsuranceId'
         },
         onUpdate: 'CASCADE',
@@ -88,7 +88,7 @@ module.exports = {
         type: Sequelize.DataTypes.STRING(255),
         allowNull: false,        
         references: {
-          model: 'lifeInsurance',
+          model: 'lifeInsurances',
           key: 'lifeInsuranceId'
         },
         onUpdate: 'CASCADE',
@@ -109,7 +109,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('lifeInsurance');
+    await queryInterface.dropTable('lifeInsurances');
     await queryInterface.dropTable('lifeInsuranceCoverage');
     await queryInterface.dropTable('accountLifeInsurance');
   }

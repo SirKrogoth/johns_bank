@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
-import iLifeInsurance from '../model/iLifeInsurance';
-import lifeInsuranceRepository from '../model/lifeInsuranceRepository';
+import iLifeInsurance from '../model/lifeInsurance/iLifeInsurance';
+import lifeInsuranceRepository from '../model/lifeInsurance/lifeInsuranceRepository';
 import { StatusCodes } from 'http-status-codes';
 
 function healthCheck(req: Request, res: Response, next: any){
@@ -30,7 +30,6 @@ async function findCoverageByAccountId(req: Request, res: Response, next: any){
 async function findAllLifeInsurance(req: Request, res: Response, next: any){
     try {        
         const lifeInsurance : iLifeInsurance[] = await lifeInsuranceRepository.findAllLifeInsurance();
-        console.log(lifeInsurance);
 
         if(lifeInsurance === null || lifeInsurance.length === 0) return res.status(StatusCodes.NOT_FOUND).end();
 
@@ -41,8 +40,31 @@ async function findAllLifeInsurance(req: Request, res: Response, next: any){
     }
 }
 
+async function findLifeInsuranceByAccountId(req: Request, res: Response, next: any){
+    try {
+        const accountId: string = req.body.accountId;
+
+        if(!accountId) return res.status(StatusCodes.BAD_REQUEST).end();
+
+        const result = await lifeInsuranceRepository.findLifeInsuranceByAccountId(accountId);
+        
+        if(result === null) return res.status(StatusCodes.BAD_REQUEST).end();
+
+        if(result?.length == 0) return res.status(StatusCodes.BAD_REQUEST).json({
+            "status": 400,
+            "messagem": "Não existe contrato vigente para este accountId."
+        }).end();
+
+        res.status(StatusCodes.OK).json(result);
+    } catch (error) {
+        console.error(`findLifeInsuranceByAccountId: ${error}`);
+        res.status(StatusCodes.BAD_REQUEST).end();
+    }
+}
+
 export default {
     findCoverageByAccountId,
     healthCheck,
-    findAllLifeInsurance
+    findAllLifeInsurance,
+    findLifeInsuranceByAccountId
 }

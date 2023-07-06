@@ -19,7 +19,17 @@ function findCoverageByAccountId(accountId) {
 function findAllLifeInsurance() {
     return lifeInsuranceModel_1.default.findAll();
 }
+function findLifeInsuranceByAccountId(accountId) {
+    var _a;
+    return (_a = lifeInsuranceModel_1.default.sequelize) === null || _a === void 0 ? void 0 : _a.query(`    
+        SELECT li.* FROM lifeinsurances as li
+        INNER JOIN accountlifeinsurance as ali ON li.lifeInsuranceId = ali.lifeInsuranceId
+        WHERE ali.accountId = '${accountId}';`, {
+        type: sequelize_1.QueryTypes.SELECT
+    });
+}
 exports.default = {
     findCoverageByAccountId,
-    findAllLifeInsurance
+    findAllLifeInsurance,
+    findLifeInsuranceByAccountId
 };

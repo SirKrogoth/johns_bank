@@ -8,6 +8,7 @@ const lifeInsuranceController_1 = __importDefault(require("../controllers/lifeIn
 const router = (0, express_1.Router)();
 //HTTP POST
 router.post('/findCoverageByAccountId', lifeInsuranceController_1.default.findCoverageByAccountId);
+router.post('/findLifeInsuranceByAccountId', lifeInsuranceController_1.default.findLifeInsuranceByAccountId);
 //HTTP GET
 router.get('/', lifeInsuranceController_1.default.healthCheck);
 router.get('/findCoverageByAccountId/:accountId', lifeInsuranceController_1.default.findCoverageByAccountId);

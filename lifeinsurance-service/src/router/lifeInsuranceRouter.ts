@@ -5,6 +5,7 @@ const router = Router();
 
 //HTTP POST
 router.post('/findCoverageByAccountId', lifeInsuranceController.findCoverageByAccountId);
+router.post('/findLifeInsuranceByAccountId', lifeInsuranceController.findLifeInsuranceByAccountId);
 
 //HTTP GET
 router.get('/', lifeInsuranceController.healthCheck);

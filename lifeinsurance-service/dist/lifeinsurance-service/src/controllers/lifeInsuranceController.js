@@ -45,7 +45,6 @@ function findAllLifeInsurance(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const lifeInsurance = yield lifeInsuranceRepository_1.default.findAllLifeInsurance();
-            console.log(lifeInsurance);
             if (lifeInsurance === null || lifeInsurance.length === 0)
                 return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).end();
             return res.status(http_status_codes_1.StatusCodes.OK).json(lifeInsurance);
@@ -56,8 +55,31 @@ function findAllLifeInsurance(req, res, next) {
         }
     });
 }
+function findLifeInsuranceByAccountId(req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const accountId = req.body.accountId;
+            if (!accountId)
+                return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).end();
+            const result = yield lifeInsuranceRepository_1.default.findLifeInsuranceByAccountId(accountId);
+            if (result === null)
+                return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).end();
+            if ((result === null || result === void 0 ? void 0 : result.length) == 0)
+                return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({
+                    "status": 400,
+                    "messagem": "Não existe contrato vigente para este accountId."
+                }).end();
+            res.status(http_status_codes_1.StatusCodes.OK).json(result);
+        }
+        catch (error) {
+            console.error(`findLifeInsuranceByAccountId: ${error}`);
+            res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).end();
+        }
+    });
+}
 exports.default = {
     findCoverageByAccountId,
     healthCheck,
-    findAllLifeInsurance
+    findAllLifeInsurance,
+    findLifeInsuranceByAccountId
 };

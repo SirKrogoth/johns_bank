@@ -1,4 +1,4 @@
-import lifeInsuranceModel from './lifeInsuranceModel';
+import lifeInsuranceModel, { iLifeInsuranceModel } from './lifeInsuranceModel';
 import iLifeInsurance from './iLifeInsurance';
 import { QueryTypes } from "sequelize";
 
@@ -17,7 +17,25 @@ function findAllLifeInsurance(){
     return lifeInsuranceModel.findAll();
 }
 
+function findLifeInsuranceByAccountId(accountId: string){
+    return lifeInsuranceModel.sequelize?.query(`    
+        SELECT li.* FROM lifeinsurances as li
+        INNER JOIN accountlifeinsurance as ali ON li.lifeInsuranceId = ali.lifeInsuranceId
+        WHERE ali.accountId = '${accountId}';`, {
+            type: QueryTypes.SELECT
+        });
+}
+
+function canceledInsuranceByAccountId(accountId: string){
+    return 
+}
+
+function insertCanceledInsuranceDateByAccountId(accountId: string){
+    
+}
+
 export default {
     findCoverageByAccountId,
-    findAllLifeInsurance
+    findAllLifeInsurance,
+    findLifeInsuranceByAccountId
 }

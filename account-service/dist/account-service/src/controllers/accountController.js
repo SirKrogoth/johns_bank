@@ -52,9 +52,10 @@ function loginAccount(req, res, next) {
                         token
                     });
                 }
+                errorMessageDefault(res);
             }
             else {
-                return res.status(401).end();
+                errorMessageDefault(res);
             }
         }
         catch (error) {
@@ -62,8 +63,15 @@ function loginAccount(req, res, next) {
         }
     });
 }
+function errorMessageDefault(res) {
+    return res.status(404).json({
+        code: "404",
+        description: "Usuário ou senha inválidos."
+    }).end();
+}
 exports.default = {
     addAccount,
     loginAccount,
-    verifyAuthentication
+    verifyAuthentication,
+    errorMessageDefault
 };

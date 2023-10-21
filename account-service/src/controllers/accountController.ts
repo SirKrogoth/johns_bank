@@ -35,7 +35,7 @@ async function loginAccount(req: Request, res: Response, next: any){
 
         if(verifyAccount !== null){
             const isValid = autentication.comparePassword(params.password, verifyAccount.password);
-
+            
             if(isValid){
                 const token = await authorization.sign(verifyAccount.accountId!);
 
@@ -44,16 +44,25 @@ async function loginAccount(req: Request, res: Response, next: any){
                     token
                 });
             }
+            errorMessageDefault(res);
         } else {
-            return res.status(401).end();
+            errorMessageDefault(res);
         }
     } catch (error) {
         res.status(400).end();
     }
 }
 
+function errorMessageDefault(res: Response){
+    return res.status(404).json({
+        code: "404",
+        description: "Usuário ou senha inválidos."
+    }).end();
+}
+
 export default {
     addAccount,
     loginAccount,
-    verifyAuthentication
+    verifyAuthentication,
+    errorMessageDefault
 }

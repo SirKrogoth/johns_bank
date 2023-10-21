@@ -5,11 +5,13 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-     "ms-commons/*": ["../__commons__/src/*"]
+     "ms-commons/*": ["../__commons__/src/*"],
+     "account-service/*": ["../account-service/src/*"]
     },
     "rootDirs": [
       "./src/", 
-      "../__commons__/src"
+      "../__commons__/src",
+      "../account-service/src"
     ],
     "resolveJsonModule": true,
     "outDir": "./dist/",

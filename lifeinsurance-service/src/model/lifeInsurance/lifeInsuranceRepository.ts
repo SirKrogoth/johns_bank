@@ -26,14 +26,6 @@ function findLifeInsuranceByAccountId(accountId: string){
         });
 }
 
-function canceledInsuranceByAccountId(accountId: string){
-    return 
-}
-
-function insertCanceledInsuranceDateByAccountId(accountId: string){
-    
-}
-
 export default {
     findCoverageByAccountId,
     findAllLifeInsurance,

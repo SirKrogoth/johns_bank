@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const lifeInsuranceRepository_1 = __importDefault(require("../model/lifeInsurance/lifeInsuranceRepository"));
 const http_status_codes_1 = require("http-status-codes");
+const uuid_1 = require("uuid");
 function healthCheck(req, res, next) {
     try {
         res.json({
@@ -77,9 +78,28 @@ function findLifeInsuranceByAccountId(req, res, next) {
         }
     });
 }
+function createNewInsurance(req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const newInsurance = req.body;
+            newInsurance.lifeInsuranceId = (0, uuid_1.v4)();
+            if (newInsurance === null)
+                return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).end();
+            const result = yield lifeInsuranceRepository_1.default.createNewInsurance(newInsurance);
+            if (result === null)
+                return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).end();
+            res.status(http_status_codes_1.StatusCodes.CREATED).end();
+        }
+        catch (error) {
+            console.error(`createNewInsurance: ${error}`);
+            res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).end();
+        }
+    });
+}
 exports.default = {
     findCoverageByAccountId,
     healthCheck,
     findAllLifeInsurance,
-    findLifeInsuranceByAccountId
+    findLifeInsuranceByAccountId,
+    createNewInsurance
 };

@@ -1,5 +1,6 @@
 import { QueryTypes , Op} from 'sequelize';
 import accountLifeInsuranceModel, { iAccountLifeInsuranceModel } from './accountLifeInsuranceModel';
+import iAccountLifeInsurance from './iAccountLifeInsurance';
 
 function cancelLifeInsuranceByAccountId(accountId: string, lifeInsuranceId: string){
     const dataAtual = new Date();
@@ -9,13 +10,11 @@ function cancelLifeInsuranceByAccountId(accountId: string, lifeInsuranceId: stri
     const hora = dataAtual.getHours();
     const minuto = dataAtual.getMinutes();
     const hoje = `${ano}/${mes}/${dia} ${hora}:${minuto}`;
-    console.log(hoje);
 
     return accountLifeInsuranceModel.sequelize?.query(`
-        UPDATE accountlifeinsurance SET canceledInsurance = '${hoje}'
+        UPDATE accountlifeinsurances SET canceledInsurance = '${hoje}'
         WHERE accountID = '${accountId}'
-        AND lifeInsuranceId = '${lifeInsuranceId}';
-    `, {
+        AND lifeInsuranceId = '${lifeInsuranceId}';`, {
         type: QueryTypes.UPDATE
     });
 }
@@ -28,7 +27,22 @@ function findAllAccountLifeInsuranceByAccountId(accountId: string){
     });
 }
 
+function findActivedAccountLifeInsuranceByAccountId(accountId: string){
+    return accountLifeInsuranceModel.findAll({
+        where: {
+            accountId: accountId,
+            canceledInsurance: null
+        }
+    });
+}
+
+async function contractANewInsuranceByClientID(contract: iAccountLifeInsurance){
+    return accountLifeInsuranceModel.create(contract);
+}
+
 export default {
     findAllAccountLifeInsuranceByAccountId,
-    cancelLifeInsuranceByAccountId
+    cancelLifeInsuranceByAccountId,
+    contractANewInsuranceByClientID,
+    findActivedAccountLifeInsuranceByAccountId
 }

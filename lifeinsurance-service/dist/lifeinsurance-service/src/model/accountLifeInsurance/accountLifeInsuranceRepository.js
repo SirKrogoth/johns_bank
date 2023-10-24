@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -14,12 +23,10 @@ function cancelLifeInsuranceByAccountId(accountId, lifeInsuranceId) {
     const hora = dataAtual.getHours();
     const minuto = dataAtual.getMinutes();
     const hoje = `${ano}/${mes}/${dia} ${hora}:${minuto}`;
-    console.log(hoje);
     return (_a = accountLifeInsuranceModel_1.default.sequelize) === null || _a === void 0 ? void 0 : _a.query(`
-        UPDATE accountlifeinsurance SET canceledInsurance = '${hoje}'
+        UPDATE accountlifeinsurances SET canceledInsurance = '${hoje}'
         WHERE accountID = '${accountId}'
-        AND lifeInsuranceId = '${lifeInsuranceId}';
-    `, {
+        AND lifeInsuranceId = '${lifeInsuranceId}';`, {
         type: sequelize_1.QueryTypes.UPDATE
     });
 }
@@ -30,7 +37,22 @@ function findAllAccountLifeInsuranceByAccountId(accountId) {
         }
     });
 }
+function findActivedAccountLifeInsuranceByAccountId(accountId) {
+    return accountLifeInsuranceModel_1.default.findAll({
+        where: {
+            accountId: accountId,
+            canceledInsurance: null
+        }
+    });
+}
+function contractANewInsuranceByClientID(contract) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return accountLifeInsuranceModel_1.default.create(contract);
+    });
+}
 exports.default = {
     findAllAccountLifeInsuranceByAccountId,
-    cancelLifeInsuranceByAccountId
+    cancelLifeInsuranceByAccountId,
+    contractANewInsuranceByClientID,
+    findActivedAccountLifeInsuranceByAccountId
 };

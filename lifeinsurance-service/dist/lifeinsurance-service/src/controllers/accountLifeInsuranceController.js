@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const accountLifeInsuranceRepository_1 = __importDefault(require("../model/accountLifeInsurance/accountLifeInsuranceRepository"));
 const http_status_codes_1 = require("http-status-codes");
+const uuid_1 = require("uuid");
 function cancelLifeInsuranceByAccountId(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -23,7 +24,7 @@ function cancelLifeInsuranceByAccountId(req, res, next) {
                 return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).end();
             if (!lifeInsuranceId)
                 return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).end();
-            const teste = accountLifeInsuranceRepository_1.default.cancelLifeInsuranceByAccountId(accountId, lifeInsuranceId);
+            yield accountLifeInsuranceRepository_1.default.cancelLifeInsuranceByAccountId(accountId, lifeInsuranceId);
             res.status(http_status_codes_1.StatusCodes.OK).json({
                 code: "200",
                 description: "Seguro cancelado com sucesso."
@@ -35,6 +36,37 @@ function cancelLifeInsuranceByAccountId(req, res, next) {
         }
     });
 }
+function contractANewInsuranceByClientID(req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const accountId = req.params.accountId;
+            const contract = req.body;
+            if (contract === null)
+                return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).end();
+            contract.accountId = accountId;
+            contract.id = (0, uuid_1.v4)();
+            const verifyContract = yield accountLifeInsuranceRepository_1.default.findActivedAccountLifeInsuranceByAccountId(accountId);
+            if (!verifyContract)
+                return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({
+                    "Message": "Indefinido."
+                });
+            if (verifyContract.length === 0) {
+                yield accountLifeInsuranceRepository_1.default.contractANewInsuranceByClientID(contract);
+                res.status(http_status_codes_1.StatusCodes.CREATED).end();
+            }
+            else {
+                res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({
+                    "Message": "O usuário já possui apólice de seguro contratado."
+                });
+            }
+        }
+        catch (error) {
+            console.log(`contractANewInsuranceByClient: ${error}`);
+            res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).end();
+        }
+    });
+}
 exports.default = {
-    cancelLifeInsuranceByAccountId
+    cancelLifeInsuranceByAccountId,
+    contractANewInsuranceByClientID
 };

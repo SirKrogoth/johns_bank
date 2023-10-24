@@ -2,6 +2,9 @@ import {Request, Response} from 'express';
 import iLifeInsurance from '../model/lifeInsurance/iLifeInsurance';
 import lifeInsuranceRepository from '../model/lifeInsurance/lifeInsuranceRepository';
 import { StatusCodes } from 'http-status-codes';
+import { v4 as uuidv4 } from 'uuid';
+import iAccountLifeInsurance from 'src/model/accountLifeInsurance/iAccountLifeInsurance';
+import accountLifeInsuranceRepository from 'src/model/accountLifeInsurance/accountLifeInsuranceRepository';
 
 function healthCheck(req: Request, res: Response, next: any){
     try {
@@ -62,9 +65,31 @@ async function findLifeInsuranceByAccountId(req: Request, res: Response, next: a
     }
 }
 
+async function createNewInsurance(req: Request, res: Response, next: any){
+    try {
+        const newInsurance = req.body as iLifeInsurance;
+
+        newInsurance.lifeInsuranceId = uuidv4();
+
+        if(newInsurance === null) return res.status(StatusCodes.BAD_REQUEST).end();
+
+        const result = await lifeInsuranceRepository.createNewInsurance(newInsurance);
+
+        if(result === null) return res.status(StatusCodes.BAD_REQUEST).end();
+
+        res.status(StatusCodes.CREATED).end();
+
+
+    } catch (error) {
+        console.error(`createNewInsurance: ${error}`);
+        res.status(StatusCodes.BAD_REQUEST).end();
+    }
+}
+
 export default {
     findCoverageByAccountId,
     healthCheck,
     findAllLifeInsurance,
-    findLifeInsuranceByAccountId
+    findLifeInsuranceByAccountId,
+    createNewInsurance
 }

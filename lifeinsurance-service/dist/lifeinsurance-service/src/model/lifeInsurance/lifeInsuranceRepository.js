@@ -28,8 +28,12 @@ function findLifeInsuranceByAccountId(accountId) {
         type: sequelize_1.QueryTypes.SELECT
     });
 }
+function createNewInsurance(newInsurance) {
+    return lifeInsuranceModel_1.default.create(newInsurance);
+}
 exports.default = {
     findCoverageByAccountId,
     findAllLifeInsurance,
-    findLifeInsuranceByAccountId
+    findLifeInsuranceByAccountId,
+    createNewInsurance
 };

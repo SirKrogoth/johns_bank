@@ -86,10 +86,34 @@ async function createNewInsurance(req: Request, res: Response, next: any){
     }
 }
 
+async function findInsuranceEnded(req: Request, res: Response, next: any){
+    try {
+        const endedInsurance = await lifeInsuranceRepository.findInsuranceEnded();
+        if(!endedInsurance) return res.status(StatusCodes.BAD_REQUEST).end();
+        res.status(StatusCodes.OK).json(endedInsurance);
+    } catch (error) {
+        console.error(`findInsuranceEnded: ${error}`);
+        res.status(StatusCodes.BAD_REQUEST).end();
+    }
+}
+
+async function findInsuranceActivated(req: Request, res: Response, next: any){
+    try {
+        const activatedInsurance = await lifeInsuranceRepository.findInsuranceActivated();
+        if(!activatedInsurance) return res.status(StatusCodes.BAD_REQUEST).end();
+        res.status(StatusCodes.OK).json(activatedInsurance);
+    } catch (error) {
+        console.error(`findInsuranceActivated: ${error}`);
+        res.status(StatusCodes.BAD_REQUEST).end();
+    }
+}
+
 export default {
     findCoverageByAccountId,
     healthCheck,
     findAllLifeInsurance,
     findLifeInsuranceByAccountId,
-    createNewInsurance
+    createNewInsurance,
+    findInsuranceEnded,
+    findInsuranceActivated
 }

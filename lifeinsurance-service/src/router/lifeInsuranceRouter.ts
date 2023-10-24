@@ -16,5 +16,7 @@ router.post('/contractANewInsuranceByClientID', validateAuthorization, validateA
 router.get('/', lifeInsuranceController.healthCheck);
 router.get('/findCoverageByAccountId/:accountId', validateAuthorization, validateAccountPermission, lifeInsuranceController.findCoverageByAccountId);
 router.get('/findAllLifeInsurance', validateAuthorization, validateAccountPermission, lifeInsuranceController.findAllLifeInsurance);
+router.get('/findInsuranceEnded', validateAuthorization, validateAccountPermission, lifeInsuranceController.findInsuranceEnded);
+router.get('/findInsuranceActivated', validateAuthorization, validateAccountPermission, lifeInsuranceController.findInsuranceActivated);
 
 export default router;

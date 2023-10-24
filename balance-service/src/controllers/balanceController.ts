@@ -29,7 +29,7 @@ async function addBalance(req: Request, res: Response, next: any){
             res.status(201).json(result);
         }        
     } catch (error) {
-        console.error('addBalance: ' + error);
+        console.log('addBalance: ' + error);
         res.status(400).end();
     }
 }

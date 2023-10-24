@@ -43,7 +43,7 @@ function addBalance(req, res, next) {
             }
         }
         catch (error) {
-            console.error('addBalance: ' + error);
+            console.log('addBalance: ' + error);
             res.status(400).end();
         }
     });

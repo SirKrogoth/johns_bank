@@ -96,10 +96,40 @@ function createNewInsurance(req, res, next) {
         }
     });
 }
+function findInsuranceEnded(req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const endedInsurance = yield lifeInsuranceRepository_1.default.findInsuranceEnded();
+            if (!endedInsurance)
+                return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).end();
+            res.status(http_status_codes_1.StatusCodes.OK).json(endedInsurance);
+        }
+        catch (error) {
+            console.error(`findInsuranceEnded: ${error}`);
+            res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).end();
+        }
+    });
+}
+function findInsuranceActivated(req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const activatedInsurance = yield lifeInsuranceRepository_1.default.findInsuranceActivated();
+            if (!activatedInsurance)
+                return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).end();
+            res.status(http_status_codes_1.StatusCodes.OK).json(activatedInsurance);
+        }
+        catch (error) {
+            console.error(`findInsuranceActivated: ${error}`);
+            res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).end();
+        }
+    });
+}
 exports.default = {
     findCoverageByAccountId,
     healthCheck,
     findAllLifeInsurance,
     findLifeInsuranceByAccountId,
-    createNewInsurance
+    createNewInsurance,
+    findInsuranceEnded,
+    findInsuranceActivated
 };

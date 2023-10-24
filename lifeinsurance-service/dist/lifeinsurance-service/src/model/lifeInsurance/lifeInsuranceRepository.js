@@ -31,9 +31,27 @@ function findLifeInsuranceByAccountId(accountId) {
 function createNewInsurance(newInsurance) {
     return lifeInsuranceModel_1.default.create(newInsurance);
 }
+function findInsuranceEnded() {
+    return lifeInsuranceModel_1.default.findAll({
+        where: {
+            endVigidity: {
+                [sequelize_1.Op.not]: null,
+            }
+        }
+    });
+}
+function findInsuranceActivated() {
+    return lifeInsuranceModel_1.default.findAll({
+        where: {
+            endVigidity: null
+        }
+    });
+}
 exports.default = {
     findCoverageByAccountId,
     findAllLifeInsurance,
     findLifeInsuranceByAccountId,
-    createNewInsurance
+    createNewInsurance,
+    findInsuranceEnded,
+    findInsuranceActivated
 };

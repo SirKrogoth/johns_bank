@@ -18,4 +18,6 @@ router.post('/contractANewInsuranceByClientID', validateAuthorizationMiddleware_
 router.get('/', lifeInsuranceController_1.default.healthCheck);
 router.get('/findCoverageByAccountId/:accountId', validateAuthorizationMiddleware_1.validateAuthorization, validateAuthorizationMiddleware_1.validateAccountPermission, lifeInsuranceController_1.default.findCoverageByAccountId);
 router.get('/findAllLifeInsurance', validateAuthorizationMiddleware_1.validateAuthorization, validateAuthorizationMiddleware_1.validateAccountPermission, lifeInsuranceController_1.default.findAllLifeInsurance);
+router.get('/findInsuranceEnded', validateAuthorizationMiddleware_1.validateAuthorization, validateAuthorizationMiddleware_1.validateAccountPermission, lifeInsuranceController_1.default.findInsuranceEnded);
+router.get('/findInsuranceActivated', validateAuthorizationMiddleware_1.validateAuthorization, validateAuthorizationMiddleware_1.validateAccountPermission, lifeInsuranceController_1.default.findInsuranceActivated);
 exports.default = router;

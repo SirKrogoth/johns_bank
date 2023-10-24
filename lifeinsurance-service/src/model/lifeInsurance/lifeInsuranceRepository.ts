@@ -1,6 +1,6 @@
 import lifeInsuranceModel, { iLifeInsuranceModel } from './lifeInsuranceModel';
 import iLifeInsurance from './iLifeInsurance';
-import { QueryTypes } from "sequelize";
+import { Op, QueryTypes } from "sequelize";
 import { iAccountLifeInsuranceModel } from '../accountLifeInsurance/accountLifeInsuranceModel';
 
 function findCoverageByAccountId(accountId: string){
@@ -31,9 +31,29 @@ function createNewInsurance(newInsurance: iLifeInsurance){
     return lifeInsuranceModel.create(newInsurance);
 }
 
+function findInsuranceEnded(){
+    return lifeInsuranceModel.findAll({
+        where: {
+            endVigidity: {
+                [Op.not]: null,
+            }
+        }
+    })
+}
+
+function findInsuranceActivated(){
+    return lifeInsuranceModel.findAll({
+        where: {
+            endVigidity: null
+        }
+    })
+}
+
 export default {
     findCoverageByAccountId,
     findAllLifeInsurance,
     findLifeInsuranceByAccountId,
-    createNewInsurance
+    createNewInsurance,
+    findInsuranceEnded,
+    findInsuranceActivated
 }

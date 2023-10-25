@@ -24,7 +24,8 @@ function cancelLifeInsuranceByAccountId(req, res, next) {
                 return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).end();
             if (!lifeInsuranceId)
                 return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).end();
-            yield accountLifeInsuranceRepository_1.default.cancelLifeInsuranceByAccountId(accountId, lifeInsuranceId);
+            const insurance = yield accountLifeInsuranceRepository_1.default.cancelLifeInsuranceByAccountId(accountId, lifeInsuranceId);
+            console.log(insurance);
             res.status(http_status_codes_1.StatusCodes.OK).json({
                 code: "200",
                 description: "Seguro cancelado com sucesso."

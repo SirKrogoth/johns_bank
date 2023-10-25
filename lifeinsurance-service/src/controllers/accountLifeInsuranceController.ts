@@ -12,7 +12,9 @@ async function cancelLifeInsuranceByAccountId(req: Request, res: Response, next:
         if(!accountId) return res.status(StatusCodes.BAD_REQUEST).end();
         if(!lifeInsuranceId) return res.status(StatusCodes.BAD_REQUEST).end();
         
-        await accountLifeInsuranceRepository.cancelLifeInsuranceByAccountId(accountId, lifeInsuranceId);
+        const insurance = await accountLifeInsuranceRepository.cancelLifeInsuranceByAccountId(accountId, lifeInsuranceId);
+
+        console.log(insurance);
 
         res.status(StatusCodes.OK).json({
             code: "200",

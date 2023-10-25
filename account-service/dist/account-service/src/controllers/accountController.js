@@ -28,6 +28,10 @@ function addAccount(req, res, next) {
             const newAccount = req.body;
             newAccount.accountId = (0, uuid_1.v4)();
             newAccount.password = autentication_1.default.hashPassword(newAccount.password);
+            const exists = yield accountRepository_1.default.findByDocument(newAccount.document);
+            if (exists !== null) {
+                res.status(409).end();
+            }
             const result = yield accountRepository_1.default.add(newAccount);
             result.password = '';
             res.status(201).json(result);

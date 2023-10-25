@@ -18,10 +18,15 @@ async function addAccount(req: Request, res: Response, next: any){
         const newAccount = req.body as iAccount;
         newAccount.accountId = uuidv4();
         newAccount.password = autentication.hashPassword(newAccount.password);
+        const exists = await accountRepository.findByDocument(newAccount.document);        
+
+        if(exists !== null){
+            res.status(409).end();
+        }         
+
         const result = await accountRepository.add(newAccount);
         result.password = '';
-        
-        res.status(201).json(result);
+        res.status(201).json(result);        
     } catch (error) {
         console.error(error);
         res.status(400).end();
